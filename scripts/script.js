@@ -1,6 +1,10 @@
 const BASE_URL = 'https://jsonplaceholder.typicode.com';
 const postContainer = document.querySelector('.postContainer');
 
+const formPost = document.querySelector('#formPost');
+const titleInput = document.querySelector('#titleInput');
+const textArea = document.querySelector('#textArea');
+
 let postList = [];
 
 const getPosts = async () => {
@@ -62,7 +66,7 @@ const createPostElement = (post) => {
   const container = document.createElement('div');
   container.classList.add('postCard');
   const commentBox = document.createElement('div');
-  commentBox.classList.add('commentBox');
+  
   commentBox.style.display = 'none';
 
   const spanTitle = document.createElement('h3');
@@ -86,6 +90,7 @@ const createPostElement = (post) => {
   commentsBtn.addEventListener('click', () => {
     const isHidden = commentBox.style.display === 'none';
     commentBox.style.display = isHidden ? 'block' : 'none';
+    commentBox.classList.add('commentBox');
     commentsBtn.textContent = isHidden ? 'Hide comments' : 'Show comments';
   })
 
@@ -102,3 +107,35 @@ const renderPosts = (posts) => {
   })
 }
 
+
+formPost.addEventListener('submit', async (event) => {
+  event.preventDefault();
+
+  const titleValue = titleInput.value.trim();
+  const textAreaValue = textArea.value.trim();
+
+  if (titleValue && textAreaValue) {
+    const newPost = {
+      postId: Math.random(),
+      title: titleValue,
+      postBody: textAreaValue,
+      userId: 1,
+      name: postList[0].name,
+      email: postList[0].email,
+      comments: [],
+      commentsCount: 0,
+    };
+
+     await fetch(`${BASE_URL}/posts`, {
+       method: 'POST',
+       headers: { 'Content-Type': 'application/json' },
+       body: JSON.stringify(newPost),
+     });
+
+    postList.unshift(newPost);
+    renderPosts(postList);
+
+    formPost.reset()
+  }
+  
+})

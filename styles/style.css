@@ -1,17 +1,17 @@
-*{
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-body{
+body {
   display: flex;
   justify-content: space-around;
   background-color: #3220fd;
   gap: 20px;
 }
 
-.postCard{
+.postCard {
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -23,12 +23,51 @@ body{
   margin-top: 16px;
 }
 
-.commentBox{
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
+.commentBox > p {
+  margin-top: 16px;
+  padding: 16px;
+  border-radius: 8px;
+  background-color: #f4f4f4;
 }
 
-.hidden{
+.hidden {
   display: none;
+}
+
+#formPost {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+#textArea {
+  border: none;
+  border-radius: 8px;
+  padding: 8px;
+}
+
+#textArea::placeholder {
+  color: #000;
+  font-size: 14px;
+}
+
+#titleInput {
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: none;
+  width: 100%;
+}
+
+#titleInput::placeholder {
+  color: #000;
+  font-size: 14px;
+}
+
+#addPostBtn {
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  background-color: #31ffb3;
 }
